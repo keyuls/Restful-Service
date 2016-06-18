@@ -12,25 +12,29 @@ namespace VehicleServices
     [ServiceContract]
     public interface IVehicleService
     {
-        [WebGet(UriTemplate = "vehicles/")]
+        [OperationContract]
+        [WebInvoke(UriTemplate = "*", Method = "*")]
+        void HandleHttpOptionsRequest();
+
+        [WebGet(ResponseFormat=WebMessageFormat.Json, UriTemplate = "/vehicles")]
         [OperationContract]
         List<Vehicle> GetVehicle();
 
-        [WebGet(UriTemplate = "vehicles/{id}")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/vehicles/{id}")]
         [OperationContract]
-        Vehicle getVehicleById();
+        Vehicle getVehicleById(String id);
 
-        [WebInvoke(Method = "PUT", UriTemplate = "vehicles/")]
+        [WebInvoke(Method = "PUT", UriTemplate = "/vehicles")]
         [OperationContract]
-        void updateVehicle();
+        void updateVehicle(Vehicle vehicle);
 
-        [WebInvoke(Method = "POST", UriTemplate = "vehicles/")]
+        [WebInvoke(Method = "POST", ResponseFormat=WebMessageFormat.Json, UriTemplate = "/vehicles")]
         [OperationContract]
-        Vehicle createVehicle();
+        Vehicle createVehicle(Vehicle vehicle);
 
-        [WebInvoke(Method = "DELETE", UriTemplate = "vehicle/{id}")]
+        [WebInvoke(Method = "DELETE", UriTemplate = "/vehicles/{id}")]
         [OperationContract]
-        void deleteVehicle();
+        void deleteVehicle( String id);
 
 
         

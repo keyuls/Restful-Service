@@ -12,35 +12,58 @@ namespace VehicleServices
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class VehicleService : IVehicleService
     {
+        public static int idGen = 100;
+        public static List<Vehicle> vehicleList = new List<Vehicle>();
 
         public List<Vehicle> GetVehicle()
         {
-            throw new NotImplementedException();
-            /*get list of vehicle and return */
+            return vehicleList;
         }
 
-        public Vehicle getVehicleById()
+        public Vehicle getVehicleById(string id)
         {
-            throw new NotImplementedException();
-            /* find vehicle by id and return*/
+           Vehicle result = vehicleList.Find(x => x.Id == Int32.Parse(id));
+           return result;
         }
 
-        public void updateVehicle()
+        public void updateVehicle(Vehicle vehicle)
         {
-            throw new NotImplementedException();
-            /*update vehicle*/
+            if (!IsEmpty(vehicle.Make) && !IsEmpty(vehicle.Model) && yearRange(vehicle.Year))
+            {
+                vehicleList.Remove(vehicleList.Where(x => x.Id == vehicle.Id).First());
+                vehicleList.Add(vehicle);
+            }
         }
 
-        public Vehicle createVehicle()
+        public Vehicle createVehicle(Vehicle vehicle)
         {
-            throw new NotImplementedException();
-            /*Create new vehicle object and store*/
+            if (!IsEmpty(vehicle.Make) && !IsEmpty(vehicle.Model) && yearRange(vehicle.Year))
+            { 
+                idGen = idGen + 1;
+                vehicle.Id = idGen;
+                vehicleList.Add(vehicle);          
+            }
+            return vehicle;
         }
 
-        public void deleteVehicle()
+        public void deleteVehicle(string id)
         {
-            throw new NotImplementedException();
-            /*remove vehicle*/
+            vehicleList.Remove( vehicleList.Where( x => x.Id == Int32.Parse(id)).First());
+        }
+
+        public void HandleHttpOptionsRequest()
+        {
+        }
+
+        public Boolean yearRange(int year) {
+            if (year >= 1950 && year <= 2050) 
+                return true; 
+            else
+                return false;
+        }
+
+        public Boolean IsEmpty(String str) {
+                return String.IsNullOrEmpty(str);
         }
     }
 }
