@@ -72,14 +72,14 @@ namespace VehicleServices
            return vehicleList.FindAll(x => x.Model == model && x.Make == make);
         }
 
-        public List<Vehicle> GetVehicleByModelYear(string model, int year)
+        public List<Vehicle> GetVehicleByModelYear(string model, string year)
         {
-            return vehicleList.FindAll(x => x.Model == model && x.Year == year);
+            return vehicleList.FindAll(x => x.Model == model && x.Year == Int32.Parse(year));
         }
 
-        public List<Vehicle> GetVehicleByMakeYear(string make, int year)
+        public List<Vehicle> GetVehicleByMakeYear(string make, string year)
         {
-            return vehicleList.FindAll(x => x.Make == make && x.Year == year);
+            return vehicleList.FindAll(x => x.Make == make && x.Year == Int32.Parse( year));
         }
 
     }

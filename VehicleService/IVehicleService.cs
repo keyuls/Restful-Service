@@ -36,17 +36,17 @@ namespace VehicleServices
         [OperationContract]
         void deleteVehicle( String id);
 
-        [WebGet(UriTemplate = "/vehicles/{model}/{make}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "/vehicles/model/{model}/make/{make}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         List<Vehicle> GetVehicleByMakeModel(string model, string make);
 
-        [WebGet(UriTemplate = "/vehicles/{model}/{year}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "/vehicles/model/{model}/year/{year}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        List<Vehicle> GetVehicleByModelYear(string model, int year);
+        List<Vehicle> GetVehicleByModelYear(string model, string year);
 
-        [WebGet(UriTemplate = "/vehicles/{make}/{year}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "/vehicles/make/{make}/year/{year}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        List<Vehicle> GetVehicleByMakeYear(string make, int year);
+        List<Vehicle> GetVehicleByMakeYear(string make, string year);
         
     }
 }
