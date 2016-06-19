@@ -65,5 +65,22 @@ namespace VehicleServices
         public Boolean IsEmpty(String str) {
                 return String.IsNullOrEmpty(str);
         }
+
+
+        public List<Vehicle> GetVehicleByMakeModel(string model, string make)
+        {
+           return vehicleList.FindAll(x => x.Model == model && x.Make == make);
+        }
+
+        public List<Vehicle> GetVehicleByModelYear(string model, int year)
+        {
+            return vehicleList.FindAll(x => x.Model == model && x.Year == year);
+        }
+
+        public List<Vehicle> GetVehicleByMakeYear(string make, int year)
+        {
+            return vehicleList.FindAll(x => x.Make == make && x.Year == year);
+        }
+
     }
 }
