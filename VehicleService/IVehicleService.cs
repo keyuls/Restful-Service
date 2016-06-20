@@ -16,11 +16,11 @@ namespace VehicleServices
         [WebInvoke(UriTemplate = "*", Method = "*")]
         void HandleHttpOptionsRequest();
 
-        [WebGet(ResponseFormat=WebMessageFormat.Json, UriTemplate = "/vehicles")]
+        [WebGet(UriTemplate = "/vehicles", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         List<Vehicle> GetVehicle();
 
-        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/vehicles/{id}")]
+        [WebGet(UriTemplate = "/vehicles/{id}",ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         Vehicle getVehicleById(String id);
 
@@ -28,7 +28,7 @@ namespace VehicleServices
         [OperationContract]
         void updateVehicle(Vehicle vehicle);
 
-        [WebInvoke(Method = "POST", ResponseFormat=WebMessageFormat.Json, UriTemplate = "/vehicles")]
+        [WebInvoke(Method = "POST",UriTemplate = "/vehicles", RequestFormat=WebMessageFormat.Json, ResponseFormat=WebMessageFormat.Json)]
         [OperationContract]
         Vehicle createVehicle(Vehicle vehicle);
 
